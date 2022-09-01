@@ -9,22 +9,31 @@ dados = {
     "menorX": 0,
     "menorY": 0,
 }
+def maiorNumero(array = []):
+    for i in range(0, 2):
+        for j in range(0, 2):
+            if array[i][j] > dados["maiorNumero"]:
+                dados["maiorNumero"] = array[i][j]
+                dados["maiorX"] = i
+                dados["mariorY"] = j
+def menorNumero(array = []):
+    for i in range(0, 2):
+        for j in range(0, 2):
+            if (array[i][j] < dados["menorNumero"] or dados['menorNumero'] ==0):
+                    dados["menorNumero"] = array[i][j]
+                    dados["menorX"] = i
+                    dados["menorY"] = j
 def pedeDados():
     matriz = []
     for i in range(0, 2):
         matriz2 = []
         for j in range(0, 2):
             numero = float(input(f"Digite um numero inteiro:\n"))
-            if numero > dados["maiorNumero"]:
-                dados["maiorNumero"] = numero
-                dados["maiorX"] = i
-                dados["mariorY"] = j
-            if (numero < dados["menorNumero"] or dados['menorNumero'] ==0):
-                dados["menorNumero"] = numero
-                dados["menorX"] = i
-                dados["menorY"] = j
             matriz2.append(numero)
         matriz.append(matriz2)
     return matriz
-print(pedeDados())
+
+data = pedeDados()
+maiorNumero(data)
+menorNumero(data)
 print(dados)
