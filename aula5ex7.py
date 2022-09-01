@@ -9,20 +9,26 @@ dados = {
     "menorX": 0,
     "menorY": 0,
 }
-def maiorNumero(array = []):
-    for i in range(0, 2):
-        for j in range(0, 2):
+
+
+def maiorNumero(array=[]):
+    for i in range(0, 6):
+        for j in range(0, 3):
             if array[i][j] > dados["maiorNumero"]:
                 dados["maiorNumero"] = array[i][j]
                 dados["maiorX"] = i
                 dados["mariorY"] = j
-def menorNumero(array = []):
+
+
+def menorNumero(array=[]):
     for i in range(0, 2):
         for j in range(0, 2):
-            if (array[i][j] < dados["menorNumero"] or dados['menorNumero'] ==0):
-                    dados["menorNumero"] = array[i][j]
-                    dados["menorX"] = i
-                    dados["menorY"] = j
+            if array[i][j] < dados["menorNumero"] or dados["menorNumero"] == 0:
+                dados["menorNumero"] = array[i][j]
+                dados["menorX"] = i
+                dados["menorY"] = j
+
+
 def pedeDados():
     matriz = []
     for i in range(0, 2):
@@ -32,6 +38,7 @@ def pedeDados():
             matriz2.append(numero)
         matriz.append(matriz2)
     return matriz
+
 
 data = pedeDados()
 maiorNumero(data)
