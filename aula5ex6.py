@@ -15,9 +15,9 @@ def melhorVolta(tempoVolta):
             menorTempo = tempoVolta[i]
     return menorTempo
 
-for y in range(0,2):
+for y in range(0,6):
     dados['nome'] = input('Digite o nome do piloto: ')
-    for i in range(0, 2):
+    for i in range(0, 6):
         dados['tempoVolta'].append(float(input('Digite o tempo da volta: ')))
         dados['menorTempo'] = melhorVolta(dados['tempoVolta'])
     corredores.append(dados)
