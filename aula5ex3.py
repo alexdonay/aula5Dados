@@ -10,7 +10,7 @@ matrizC = []
 def pedeDimencoes():
     return input('Digite a dimenção da Matriz (AxB): ')
 
-def pedeDados( dimencaoY,dimencaoX):
+def pedeDados(dimencaoX,dimencaoY):
     matriz = []
     for i in range(0,dimencaoX ):
         matriz2 = []
@@ -28,21 +28,29 @@ def isPossible(dimA, dimB):
 def multiplicaMatriz(matrizA, matrizB):
     matrizC = []
     for i in range(0, len(matrizA)):
+        
         matrizAux =[]
         mult = 0
-        for j in range(0, len(matrizA[i])):
-            mult += matrizA[i][j]* matrizB[j][i]
-        matrizAux.append(mult)
+        for j in range(len(matB[0])):
+            for k in range(0,len(matB)):
+                print(f"{matrizA[i][k]} * {matrizB[k][j]} = {matrizA[i][k]* matrizB[k][j]}")
+                mult += matrizA[i][k]* matrizB[k][j]
+            matrizAux.append(mult)
+            print(mult)
+            mult = 0
         matrizC.append(matrizAux)
     return matrizC
 
+
+print("Matriz 1")
 dimA = pedeDimencoes()
+print("matriz 2")
 dimB = pedeDimencoes()
 
 if(isPossible(dimA, dimB)):
     matA = pedeDados(int(dimA.split("x")[0]),int(dimA.split("x")[1]))
     matB = pedeDados(int(dimB.split("x")[0]),int(dimB.split("x")[1]))
-    matC = multiplicaMatriz(matA,matB)
+    matC = multiplicaMatriz(matA, matB)
 
 print(matA)
 print(matB)
