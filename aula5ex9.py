@@ -1,6 +1,10 @@
 # Faça um programa que leia uma matriz 3x3 que representa um tabuleiro de jogo da velha
 # indique qual posição deveria ser jogada para ganhar o jogo (se possível) ou ao menos evitar uma derrota.
 
+def regras():
+    print("\nBem vindo ao jogo da Velha\n")
+    print("O jogador que preencher uma linha, coluna ou eixo veritical ganha!")
+    print("\nDigite as cordenadas da jogada no formato x,y\n")
 
 def pedeNomeJogador():
     nome1 = input("Informe o nome do jogador 1: ")
@@ -9,32 +13,24 @@ def pedeNomeJogador():
     jogador2 = {"nome": nome2, "simbulo": "O"}
     return [jogador1,jogador2]
 
-
-def regras():
-    print("\nBem vindo ao jogo da Velha\n")
-    print("O jogador que preencher uma linha, coluna ou eixo veritical ganha!")
-    print("\nDigite as cordenadas da jogada no formato x,y\n")
-
 def imprimeTabuleiro (tabuleiro):
     for linha in tabuleiro:
         print(linha)
 
-def trocaJogador(jogadorAtivo, jogador1, jogador2):
-    if jogadorAtivo["nome"] == jogador1["nome"]:
-        return jogador2
-    else:
-        return jogador1
+def jogada(jogador):
+    cordenadas = input(f"Jogador {jogador['nome']} Digite a cordenada para jogar no formado X,Y ")
+    return cordenadas
 
 def movimentoValido(tabuleiro, posicao):
-    x = posicao.split(",")[0]
-    y = posicao.split(",")[1]
+    x = int(posicao.split(",")[0])
+    y = int(posicao.split(",")[1])
     if x > 2 or x < 0 or y > 2 or y < 0 or tabuleiro[x][y] != "":
         return False
     else:
         return True
 
 def verificaVencedor(tabuleiro):
-    for i in range(tabuleiro):
+    for i in range(len(tabuleiro)):
         if (tabuleiro[i][0] == tabuleiro[i][1] == tabuleiro[i][2]) or (
             tabuleiro[0][i] == tabuleiro[1][i] == tabuleiro[2][i]
             or (
@@ -46,21 +42,27 @@ def verificaVencedor(tabuleiro):
         else:
             return False
 
-def jogada(jogador):
-    cordenadas = input(f"Jogador {jogador['nome']} Digite a cordenada para jogar")
-    return cordenadas
+
+
+def trocaJogador(jogadorAtivo, jogadores):
+    if jogadorAtivo["nome"] == jogadores[0]["nome"]:
+        return jogadores[1]
+    else:
+        return jogadores[0]
+
+
+
 
 def inicio():
+    tabuleiro = [["", "", ""], ["", "", ""], ["", "", ""]]
     regras()
+    
+    imprimeTabuleiro(tabuleiro)
     jogadores = pedeNomeJogador()
     jogadorAtivo = jogadores[0]
-    fimJogo = False
-    while(fimJogo != True):
-        tabuleiro = [["", "", ""], ["", "", ""], ["", "", ""]]
-        evalidMov = False
-        while(evalidMov != True):
-            imprimeTabuleiro(tabuleiro)
-            evalidMov = 
-        fimJogo = True
+    movimentoValido(tabuleiro, jogada(jogadorAtivo))
+    jogadorAtivo = trocaJogador(jogadorAtivo, jogadores)
+    print(verificaVencedor(tabuleiro))
 
+  
 inicio()
