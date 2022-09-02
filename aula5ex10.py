@@ -9,7 +9,6 @@
 # Informe qual turma tem maior média,
 # quais alunos tiveram média maior que a média de sua turma.
 
-from operator import index
 
 
 m = []

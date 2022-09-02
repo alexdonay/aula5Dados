@@ -17,9 +17,15 @@ def imprimeTabuleiro (tabuleiro):
     for linha in tabuleiro:
         print(linha)
 
-def jogada(jogador):
-    cordenadas = input(f"Jogador {jogador['nome']} Digite a cordenada para jogar no formado X,Y ")
-    return cordenadas
+def jogada(jogador, tabuleiro):
+    jogadavalida = False
+    while(jogadavalida == False):
+        posicao = input(f"Jogador {jogador['nome']} Digite a cordenada para jogar no formado X,Y ")
+        jogadavalida = movimentoValido(tabuleiro, posicao)
+    x = int(posicao.split(",")[0])
+    y = int(posicao.split(",")[1])
+    tabuleiro[x][y] = jogador['simbulo']
+    return tabuleiro
 
 def movimentoValido(tabuleiro, posicao):
     x = int(posicao.split(",")[0])
@@ -30,18 +36,17 @@ def movimentoValido(tabuleiro, posicao):
         return True
 
 def verificaVencedor(tabuleiro):
+    fim = False
     for i in range(len(tabuleiro)):
-        if (tabuleiro[i][0] == tabuleiro[i][1] == tabuleiro[i][2]) or (
-            tabuleiro[0][i] == tabuleiro[1][i] == tabuleiro[2][i]
-            or (
-                tabuleiro[0, 0] == tabuleiro[1, 1] == tabuleiro[2][2]
-                or tabuleiro[0][2] == tabuleiro[1][1] == tabuleiro[1][0]
-            )
+        if(tabuleiro[0][i]==tabuleiro[1][i]==tabuleiro[2][i]!="" or
+        tabuleiro[i][0]==tabuleiro[i][1]==tabuleiro[i][2]!="" or
+        tabuleiro[0][0]==tabuleiro[1][1]==tabuleiro[2][2]!="" or
+        tabuleiro[0][2]==tabuleiro[1][1]==tabuleiro[2][0]!=""
         ):
-            return True
-        else:
-            return False
-
+            fim = True
+            break
+    return fim
+    
 
 
 def trocaJogador(jogadorAtivo, jogadores):
@@ -51,18 +56,20 @@ def trocaJogador(jogadorAtivo, jogadores):
         return jogadores[0]
 
 
-
-
 def inicio():
     tabuleiro = [["", "", ""], ["", "", ""], ["", "", ""]]
+    fimJogo = False
     regras()
     
-    imprimeTabuleiro(tabuleiro)
     jogadores = pedeNomeJogador()
     jogadorAtivo = jogadores[0]
-    movimentoValido(tabuleiro, jogada(jogadorAtivo))
-    jogadorAtivo = trocaJogador(jogadorAtivo, jogadores)
-    print(verificaVencedor(tabuleiro))
+    while(fimJogo==False):
+        imprimeTabuleiro(tabuleiro)
+        tabuleiro = jogada(jogadorAtivo, tabuleiro)
+        fimJogo = verificaVencedor(tabuleiro)
+        jogadorAtivo = trocaJogador(jogadorAtivo, jogadores)
+        
+    print("fim do jogo")
 
   
 inicio()
