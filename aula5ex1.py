@@ -15,7 +15,10 @@ def imprimir(matriz):
 for i in range(0, 3):
     for j in range(0, 3):
         origem[i][j] = int(input(f"Digite um numero inteiro \n"))
-        destino[i][j] = origem[i][j] * k
+        if(i==j):
+            destino[i][j] = origem[i][j] * k
+        else:
+            destino[i][j] = origem[i][j]
 
 print("Matriz original")
 imprimir(origem)

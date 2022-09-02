@@ -10,9 +10,9 @@ matrizC = []
 def pedeDimencoes():
     return input('Digite a dimenção da Matriz (AxB): ')
 
-def pedeDados(, dimencaoY):
+def pedeDados( dimencaoY,dimencaoX):
     matriz = []
-    for i in range(0, dimencaoX):
+    for i in range(0,dimencaoX ):
         matriz2 = []
         for j in range(0, dimencaoY):
             matriz2.append(int(input(f"({i} - {j}) Digite um numero inteiro:\n")))
