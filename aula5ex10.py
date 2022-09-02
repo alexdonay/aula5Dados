@@ -9,6 +9,9 @@
 # Informe qual turma tem maior média,
 # quais alunos tiveram média maior que a média de sua turma.
 
+from operator import index
+
+
 m = []
 
 for i in range(2):
@@ -16,17 +19,22 @@ for i in range(2):
     somaNota = 0
     turma['nome'] = input('Digite o nome da turma: ')
     for j in range(2):
-        aluno = {'nome':'', 'notas':[]}
-        notas = []
+        aluno = {'nome':'', 'notas':[0,0,0]}
         aluno['nome'] = input('Digite o nome do aluno: ')
-        notas.append(float(input('Digite a primeira nota: ')))
-        notas.append(float(input('Digite a segunda nota: ')))
-        notas.append(notas[0] + notas[1] / 2)
-        aluno['notas'].append(notas)
+        aluno['notas'][0] = (float(input('Digite a primeira nota: ')))
+        aluno['notas'][1] = (float(input('Digite a segunda nota: ')))
+        aluno['notas'][2] = (aluno['notas'][0] + aluno['notas'][1] / 2)
         turma['alunos'].append(aluno)
-    somaNota += notas[2] 
-    turma['media'] = notas[2] / 3
+    somaNota += aluno['notas'][2] 
+    turma['media'] = somaNota / 3
     m.append(turma)
 
 for i in m:
-    print(i)
+    print(f" A turma: {i['nome']} tem a média : {i['media']}")
+    for j in i['alunos']:
+        o = 0
+        if(i['media']<j['notas'][o]):
+            print(f" O aluno: {j['nome']} teve a média maior que a média da turma {j['notas'][o]}")
+        o += 1
+            
+            
