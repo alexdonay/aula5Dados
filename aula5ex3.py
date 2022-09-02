@@ -1,46 +1,49 @@
+# 3)	Faça um programa que leia as dimensões de duas matrizes A e B,
+#  depois leia as duas matrizes (os elementos devem ser inteiros).
+# Se as matrizes forem de tamanhos compatíveis para multiplicação,
+#  multiplique as matrizes.
+# Imprima as matrizes A, B e a matriz resultante da multiplicação.
+
 matrizA = []
 matrizB = []
 matrizC = []
+def pedeDimencoes():
+    return input('Digite a dimenção da Matriz (AxB): ')
 
-
-def pedeDados(dimencaoX, dimencaoY):
+def pedeDados(, dimencaoY):
     matriz = []
     for i in range(0, dimencaoX):
         matriz2 = []
         for j in range(0, dimencaoY):
-            matriz2.append(int(input(f"Digite um numero inteiro:\n")))
+            matriz2.append(int(input(f"({i} - {j}) Digite um numero inteiro:\n")))
         matriz.append(matriz2)
     return matriz
 
+
+def isPossible(dimA, dimB):
+    dimAy = dimA.split("x")[1]
+    dimBx = dimB.split("x")[0]
+    return dimAy == dimBx
 
 def multiplicaMatriz(matrizA, matrizB):
-    matriz = []
+    matrizC = []
     for i in range(0, len(matrizA)):
-        matriz2 = []
+        matrizAux =[]
+        mult = 0
         for j in range(0, len(matrizA[i])):
-            matriz2.append(matrizA[i][j] * matrizB[i][j])
-        matriz.append(matriz2)
-        matriz2 = []
-    return matriz
+            mult += matrizA[i][j]* matrizB[j][i]
+        matrizAux.append(mult)
+        matrizC.append(matrizAux)
+    return matrizC
 
+dimA = pedeDimencoes()
+dimB = pedeDimencoes()
 
-def exibeDados(matriz, matrizNome):
-    print(f"a matriz é a {matrizNome}")
-    for i in range(0, len(matriz)):
-        print(matriz[i])
+if(isPossible(dimA, dimB)):
+    matA = pedeDados(int(dimA.split("x")[0]),int(dimA.split("x")[1]))
+    matB = pedeDados(int(dimB.split("x")[0]),int(dimB.split("x")[1]))
+    matC = multiplicaMatriz(matA,matB)
 
-
-dimencaoA = input("Digite a dimentecao da matriz A fomato AXB")
-dimencaoB = input("digite a dimentecao da matriz B formato AXB")
-
-if dimencaoA != dimencaoB:
-    print("a matriz A não é compativel com a matriz B")
-else:
-    dimencaoX = int(dimencaoA.split("x")[0])
-    dimencaoY = int(dimencaoA.split("x")[1])
-    matrizA = pedeDados(dimencaoX, dimencaoY)
-    matrizB = pedeDados(dimencaoX, dimencaoY)
-    matrizC = multiplicaMatriz(matrizA, matrizB)
-    exibeDados(matrizA, "MatrizA")
-    exibeDados(matrizB, "matrizB")
-    exibeDados(matrizC, "matrizC")
+print(matA)
+print(matB)
+print(matC)
